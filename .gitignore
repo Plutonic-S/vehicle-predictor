@@ -28,5 +28,4 @@ frontend_backup/
 .streamlit/secrets.toml
 
 # Local notebook and dataset
-Vehicle_Price_and_Condition.ipynb
 vehicles.csv

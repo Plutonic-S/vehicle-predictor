@@ -2,15 +2,23 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-# Install dependencies
+# Install dependencies (including huggingface_hub for model download)
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt huggingface_hub
 
-# Copy application code and models
-COPY . .
+# Copy application code (not models - they'll be downloaded)
+COPY app.py model_handler.py ./
 
-# List files for debugging
-RUN ls -la /app && echo "--- Python files ---" && find /app -name "*.py"
+# Download models from Hugging Face
+RUN python -c "from huggingface_hub import hf_hub_download; \
+    import os; \
+    os.makedirs('models', exist_ok=True); \
+    files = ['classification_model.pkl', 'regression_model.pkl', 'scaler_clf.pkl', 'scaler_reg.pkl', 'label_encoders.pkl', 'condition_encoder.pkl']; \
+    [hf_hub_download(repo_id='Aleph-7/vehicle-predictor-models', filename=f, local_dir='models') for f in files]; \
+    print('✅ Models downloaded')"
+
+# Verify models are present
+RUN ls -la /app/models
 
 # Expose port
 EXPOSE 5000

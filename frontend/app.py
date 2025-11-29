@@ -25,7 +25,7 @@ API_URL = os.getenv("BACKEND_URL") or st.secrets.get("BACKEND_URL", "http://loca
 def fetch_supported_values():
     """Fetch supported categorical values from API"""
     try:
-        response = requests.get(f"{API_URL}/supported-values", timeout=5)
+        response = requests.get(f"{API_URL}/supported-values", timeout=60)
         if response.status_code == 200:
             return response.json()
         return None

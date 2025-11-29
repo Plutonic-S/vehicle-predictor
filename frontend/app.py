@@ -36,7 +36,7 @@ def fetch_supported_values():
 def check_api_health():
     """Check if API is running"""
     try:
-        response = requests.get(f"{API_URL}/health", timeout=2)
+        response = requests.get(f"{API_URL}/health", timeout=60)
         return response.status_code == 200
     except:
         return False
@@ -231,7 +231,8 @@ with tab1:
                     }
                     
                     try:
-                        response = requests.post(f"{API_URL}/predict/price", json=data, timeout=10)
+                        with st.spinner("🔮 Predicting price... (May take up to 60s on first request)"):
+                            response = requests.post(f"{API_URL}/predict/price", json=data, timeout=60)
                         result = response.json()
                         
                         if result.get('success'):
@@ -328,7 +329,8 @@ with tab2:
                     }
                     
                     try:
-                        response = requests.post(f"{API_URL}/predict/condition", json=data, timeout=10)
+                        with st.spinner("🔮 Predicting condition... (May take up to 60s on first request)"):
+                            response = requests.post(f"{API_URL}/predict/condition", json=data, timeout=60)
                         result = response.json()
                         
                         if result.get('success'):

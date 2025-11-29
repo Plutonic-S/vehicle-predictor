@@ -11,11 +11,16 @@ venv/
 .idea/
 *.log
 .DS_Store
-# Keep the old files for reference but don't commit
-app.py
-frontend.py
-model_handler.py
-models/
-*.md# Local notebook and dataset
+
+# OLD root-level files (keep for reference but don't commit)
+/app.py
+/frontend.py
+/model_handler.py
+/models/
+
+# Exclude large model files (>100MB) - too big for GitHub
+backend/models/*.pkl
+
+# Local notebook and dataset
 Vehicle_Price_and_Condition.ipynb
 vehicles.csv

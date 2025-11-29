@@ -21,6 +21,12 @@ venv/
 # Exclude large model files (>100MB) - too big for GitHub
 backend/models/*.pkl
 
+# Frontend backup
+frontend_backup/
+
+# Streamlit secrets
+.streamlit/secrets.toml
+
 # Local notebook and dataset
 Vehicle_Price_and_Condition.ipynb
 vehicles.csv

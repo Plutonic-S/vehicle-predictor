@@ -16,3 +16,6 @@ app.py
 frontend.py
 model_handler.py
 models/
+*.md# Local notebook and dataset
+Vehicle_Price_and_Condition.ipynb
+vehicles.csv

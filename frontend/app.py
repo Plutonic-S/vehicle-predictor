@@ -15,9 +15,8 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# API Configuration - use environment variable for production
-import os
-API_URL = os.getenv("BACKEND_URL") or st.secrets.get("BACKEND_URL", "http://localhost:5000")
+# API Configuration - local backend only
+API_URL = "http://localhost:5000"
 
 # ==================== HELPER FUNCTIONS ====================
 
@@ -25,7 +24,7 @@ API_URL = os.getenv("BACKEND_URL") or st.secrets.get("BACKEND_URL", "http://loca
 def fetch_supported_values():
     """Fetch supported categorical values from API"""
     try:
-        response = requests.get(f"{API_URL}/supported-values", timeout=60)
+        response = requests.get(f"{API_URL}/supported-values", timeout=10)
         if response.status_code == 200:
             return response.json()
         return None
@@ -36,7 +35,7 @@ def fetch_supported_values():
 def check_api_health():
     """Check if API is running"""
     try:
-        response = requests.get(f"{API_URL}/health", timeout=60)
+        response = requests.get(f"{API_URL}/health", timeout=5)
         return response.status_code == 200
     except:
         return False
@@ -231,8 +230,8 @@ with tab1:
                     }
                     
                     try:
-                        with st.spinner("🔮 Predicting price... (May take up to 60s on first request)"):
-                            response = requests.post(f"{API_URL}/predict/price", json=data, timeout=60)
+                        with st.spinner("🔮 Predicting price..."):
+                            response = requests.post(f"{API_URL}/predict/price", json=data, timeout=10)
                         result = response.json()
                         
                         if result.get('success'):
@@ -329,8 +328,8 @@ with tab2:
                     }
                     
                     try:
-                        with st.spinner("🔮 Predicting condition... (May take up to 60s on first request)"):
-                            response = requests.post(f"{API_URL}/predict/condition", json=data, timeout=60)
+                        with st.spinner("🔮 Predicting condition..."):
+                            response = requests.post(f"{API_URL}/predict/condition", json=data, timeout=10)
                         result = response.json()
                         
                         if result.get('success'):

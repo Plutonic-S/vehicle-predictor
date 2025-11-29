@@ -7,8 +7,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application code and models
-COPY app.py model_handler.py ./
-COPY models/ ./models/
+COPY . .
 
 # Expose port
 EXPOSE 5000

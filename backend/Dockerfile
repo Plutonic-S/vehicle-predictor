@@ -2,9 +2,9 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-# Install dependencies (including huggingface_hub for model download)
+# Install dependencies
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt huggingface_hub
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application code (not models - they'll be downloaded)
 COPY app.py model_handler.py download_models.py ./

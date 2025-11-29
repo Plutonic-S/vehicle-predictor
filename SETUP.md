@@ -14,7 +14,7 @@ A machine learning application that predicts vehicle prices and conditions using
 
 ```bash
 # Navigate to project directory
-cd /home/pluto/Documents/trashuni/workshop/Vehicle_Price_and__Condition_final
+cd Vehicle_Price_and__Condition_final
 
 # Activate virtual environment
 source flask_env/bin/activate
@@ -35,7 +35,7 @@ python app.py
 
 ```bash
 # In a NEW terminal, navigate to project directory
-cd /home/pluto/Documents/trashuni/workshop/Vehicle_Price_and__Condition_final
+cd /Vehicle_Price_and__Condition_final
 
 # Activate virtual environment
 source flask_env/bin/activate

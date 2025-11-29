@@ -1,0 +1,11 @@
+# Streamlit secrets (don't commit actual secrets)
+.streamlit/secrets.toml
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/

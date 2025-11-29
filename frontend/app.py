@@ -17,7 +17,7 @@ st.set_page_config(
 
 # API Configuration - use environment variable for production
 import os
-API_URL = os.getenv("BACKEND_URL", "http://localhost:5000")
+API_URL = os.getenv("BACKEND_URL") or st.secrets.get("BACKEND_URL", "http://localhost:5000")
 
 # ==================== HELPER FUNCTIONS ====================
 

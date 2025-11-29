@@ -7,20 +7,10 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt huggingface_hub
 
 # Copy application code (not models - they'll be downloaded)
-COPY app.py model_handler.py ./
+COPY app.py model_handler.py download_models.py ./
 
 # Download models from Hugging Face
-RUN mkdir -p /app/models && \
-    python -c "from huggingface_hub import hf_hub_download; \
-    import shutil; \
-    files = ['classification_model.pkl', 'regression_model.pkl', 'scaler_clf.pkl', 'scaler_reg.pkl', 'label_encoders.pkl', 'condition_encoder.pkl']; \
-    for f in files: \
-        downloaded_path = hf_hub_download(repo_id='Aleph-7/vehicle-predictor-models', filename=f); \
-        shutil.copy(downloaded_path, f'/app/models/{f}'); \
-    print('✅ Models downloaded and copied')"
-
-# Verify models are present
-RUN ls -la /app/models && echo "Model files:" && ls -lh /app/models/*.pkl
+RUN python download_models.py
 
 # Expose port
 EXPOSE 5000
